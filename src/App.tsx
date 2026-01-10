@@ -1,18 +1,28 @@
 import "./App.css";
-import { Logo } from "./components/Logo";
+import ContactSupport from "./components/contactSupport";
+import Footer from "./components/layout/Footer";
+import Header from "./components/layout/header";
+import AboutSection from "./features/about/AboutSection";
+import AuditTax from "./features/audit-tax/AuditTax";
+import BusinessRegistration from "./features/business-reg/businessReg";
+import HeroSlider from "./features/hero-slider/HeroSlider";
+import NgoReg from "./features/ngo-reg/NgoReg";
+import Trademark from "./features/trademark/Trademark";
 
 function App() {
   return (
     <>
-      <h1 className="text-3xl font-bold underline text-blue-600">
-        Hello World
-      </h1>
-      <Logo
-        size={40}
-        color="#ff5733"
-        strokeWidth={3}
-        className="hover:scale-110 transition-transform"
-      />
+      <ContactSupport />
+      <Header />
+      <main>
+        <HeroSlider />
+        <AboutSection />
+        <BusinessRegistration />
+        <NgoReg />
+        <Trademark />
+        <AuditTax />
+      </main>
+      <Footer />
     </>
   );
 }
