@@ -1,0 +1,17 @@
+@import "tailwindcss";
+@import "./variable.css";
+
+/* src/styles/main.css 
+.custom-logo {
+  color: var(--brand-primary);
+  width: var(--logo-size);
+  height: var(--logo-size);
+  transition: transform 0.3s ease;
+}
+
+.custom-logo:hover {
+  color: var(--brand-secondary);
+  transform: rotate(15deg);
+}
+
+*/
