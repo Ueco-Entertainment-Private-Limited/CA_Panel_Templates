@@ -8,9 +8,7 @@ const SOCIAL_LINKS = [
 
 const ContactSupport = () => {
   return (
-    // 'h-2' on mobile creates the thin blue strip.
-    // 'md:h-12' restores the full height for larger screens.
-    <div className="bg-blue-900 h-2 md:h-12 flex items-center px-4 md:px-12 justify-between text-white transition-all duration-300 overflow-hidden">
+    <div className="h-2 md:h-12 flex items-center px-4 md:px-12 justify-between text-white transition-all duration-300 overflow-hidden" style={{ backgroundColor: 'var(--brand-blue)' }}>
       {/* 
           Contact Section 
           'hidden md:flex' hides all contact info on mobile and only shows it from 768px+
