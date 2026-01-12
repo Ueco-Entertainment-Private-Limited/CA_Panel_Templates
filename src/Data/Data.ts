@@ -176,7 +176,7 @@ export const TRADEMARK_REGISTRATION = [
   {
     id: 1,
     icon: FaTrademark,
-    heaading: "Trademark Registration",
+    heading: "Trademark Registration",
     paragraph:
       "Register your brand name/ logo and create your goodwill in the market.",
     iconColor: "#808080",
@@ -184,7 +184,7 @@ export const TRADEMARK_REGISTRATION = [
   {
     id: 2,
     icon: Copyright,
-    heaading: "Copyright Registration",
+    heading: "Copyright Registration",
     paragraph:
       "Copyright is the legal right to ownership and enojyment entilted to creators.",
     iconColor: "#808080",
@@ -192,7 +192,7 @@ export const TRADEMARK_REGISTRATION = [
   {
     id: 3,
     icon: Compass,
-    heaading: "Design Registration",
+    heading: "Design Registration",
     paragraph:
       "Protect and newly created shape, configuration, patterns and composition of lines or colours.",
     iconColor: "#808080",
@@ -200,7 +200,7 @@ export const TRADEMARK_REGISTRATION = [
   {
     id: 4,
     icon: TestTubeIcon,
-    heaading: "Patent Registration",
+    heading: "Patent Registration",
     paragraph:
       "Secure invention or the special right given to an inventor by a govt to manufacture, sell or use invention",
     iconColor: "#808080",
