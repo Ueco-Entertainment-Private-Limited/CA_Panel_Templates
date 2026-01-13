@@ -1,5 +1,11 @@
+import About from "./features/About/About";
+import AuditTax from "./features/Audit-Tax/AuditTax";
+import BusinessRegistration from "./features/Business-Reg/BusinessRegistration";
 import { ContactSupport } from "./features/Contact-Support/ContactSupport";
 import HeroSlide from "./features/Hero-Section/HeroSlide";
+import NGO_Registration from "./features/NGO_REG/NGO_Registration";
+import Trademark_Registration from "./features/Trademark/Trademark_Registration";
+import Footer from "./layouts/Footer";
 import Header from "./layouts/Header";
 
 export default function App() {
@@ -9,23 +15,13 @@ export default function App() {
       <Header />
       <main>
         <HeroSlide />
-        {/* //   <AboutSection />
-      //   <BusinessRegistration />
-      //   <NgoRegistration />
-      //   <Trademark />
-      //   <AuditTax /> */}
+        <About />
+        <BusinessRegistration />
+        <NGO_Registration />
+        <Trademark_Registration />
+        <AuditTax />
       </main>
-      {/* // <Footer /> */}
+      <Footer />
     </>
   );
 }
-
-// <motion.div
-//   initial={{ opacity: 0, y: 20 }}
-//   animate={{ opacity: 1, y: 0 }}
-//   className="p-10"
-// >
-//   <div className="bg-primary text-primary-foreground p-4 rounded-lg">
-//     Motion is Working
-//   </div>
-// </motion.div>

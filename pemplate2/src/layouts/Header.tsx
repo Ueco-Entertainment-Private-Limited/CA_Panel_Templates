@@ -37,7 +37,7 @@ const Header = () => {
           </a>
         </div>
 
-        {/* 2. Desktop Navigation - Classic Blue & Underline Effect */}
+        {/* 2. Desktop Navigation */}
         <nav className="hidden lg:flex items-center h-full">
           <ul className="flex items-center gap-6 h-full">
             {NAV_ITEMS.map((item) => (
@@ -57,8 +57,6 @@ const Header = () => {
                   >
                     {item.name}
                   </span>
-
-                  {/* Yellow Underline Animation */}
                   <motion.div
                     initial={{ width: 0 }}
                     animate={{ width: hoveredItem === item.name ? "100%" : 0 }}
@@ -67,7 +65,6 @@ const Header = () => {
                   />
                 </div>
 
-                {/* Dropdown Menu */}
                 <AnimatePresence>
                   {item.categories && hoveredItem === item.name && (
                     <motion.div
@@ -95,32 +92,49 @@ const Header = () => {
           </ul>
         </nav>
 
-        {/* 3. Mobile Toggle Only */}
+        {/* 3. Mobile Hamburger Trigger */}
         <div className="lg:hidden flex items-center">
           <button
             className="p-2 text-[#034EA2] hover:bg-blue-50 rounded-xl transition-colors"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            onClick={() => setIsMobileMenuOpen(true)}
           >
-            {isMobileMenuOpen ? <X size={32} /> : <Menu size={32} />}
+            <Menu size={32} />
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu Overlay - Updated for Blue Theme */}
+      {/* Fullscreen Mobile Menu Overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
-            className="lg:hidden fixed inset-0 top-20 bg-white z-60 overflow-y-auto"
+            transition={{ type: "tween", duration: 0.3 }}
+            className="fixed inset-0 bg-white z-9999 overflow-y-auto flex flex-col"
           >
+            {/* Header inside Overlay for Logo and Close Button */}
+            <div className="flex items-center justify-between px-6 h-20 border-b border-gray-100 shrink-0">
+              <img
+                src={logo}
+                alt="Cagmc Logo"
+                className="h-10 w-auto object-contain"
+              />
+              <button
+                className="p-2 text-[#034EA2] hover:bg-blue-50 rounded-xl transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <X size={32} />
+              </button>
+            </div>
+
+            {/* Mobile Nav Items */}
             <nav className="p-6">
               <ul className="flex flex-col">
                 {NAV_ITEMS.map((item) => (
                   <li key={item.name} className="border-b border-gray-100">
                     <div
-                      className={`flex items-center justify-between py-5 text-xl font-bold ${
+                      className={`flex items-center justify-between py-5 text-xl font-bold cursor-pointer ${
                         expandedItem === item.name
                           ? "text-[#EAB308]"
                           : "text-[#034EA2]"
@@ -132,19 +146,25 @@ const Header = () => {
                       }
                     >
                       {item.name}
+                      {item.categories && (
+                        <span className="text-sm">
+                          {expandedItem === item.name ? "−" : "+"}
+                        </span>
+                      )}
                     </div>
 
                     {item.categories && expandedItem === item.name && (
                       <motion.ul
-                        initial={{ height: 0 }}
-                        animate={{ height: "auto" }}
-                        className="bg-blue-50 rounded-xl mb-4"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        className="bg-blue-50 rounded-xl mb-4 overflow-hidden"
                       >
                         {item.categories.map((cat) => (
                           <li key={cat}>
                             <a
                               href="#"
                               className="block py-4 px-6 text-[#034EA2] font-semibold border-l-4 border-[#EAB308]"
+                              onClick={() => setIsMobileMenuOpen(false)}
                             >
                               {cat}
                             </a>
