@@ -10,8 +10,8 @@ export const ContactSupport = () => {
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       // UPDATED CLASS: Added 'hidden md:flex' to hide on mobile and show on desktop
-      className="hidden md:flex w-full bg-[#034EA2] py-2.5 px-6 md:px-16 flex-col md:flex-row items-center justify-between gap-4 shadow-md border-b border-white/10"
-    >
+        className="hidden md:flex w-full bg-[#034EA2] py-0.5 px-6 md:px-16 flex-col md:flex-row items-center justify-between gap-4 shadow-md border-b border-white/10"
+      >
       {/* Contact Details */}
       <div className="flex flex-wrap justify-center items-center gap-6 md:gap-12">
         <a 
