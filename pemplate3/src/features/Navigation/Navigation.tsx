@@ -3,7 +3,7 @@
 import { useState } from "react";
 import LOGO from "../../assets/Image/logo/logo.jpg";
 import { motion, AnimatePresence } from "framer-motion";
-import { User, PhoneCall, Menu, ChevronDown } from "lucide-react"; // Added Chevron
+import { User, PhoneCall, Menu, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -59,7 +59,7 @@ const Navigation = () => {
       className="sticky top-0 z-50 w-full"
     >
       <div className="container mx-auto px-4 py-4">
-        <div className="bg-white border border-slate-100 rounded-2xl flex items-center justify-between px-6 h-14 shadow-xl relative">
+        <div className="bg-white border border-slate-100 rounded-2xl flex items-center justify-between px-6 h-14 shadow-sm relative">
           <motion.img
             whileHover={{ scale: 1.05 }}
             src={LOGO}
@@ -73,6 +73,7 @@ const Navigation = () => {
               {NAV_ITEMS.map((item) => (
                 <li
                   key={item.name}
+                  // FIX: Added 'relative' so the dropdown anchors to this specific item
                   className="relative h-full flex items-center"
                   onMouseEnter={() => setHoveredItem(item.name)}
                   onMouseLeave={() => setHoveredItem(null)}
@@ -80,7 +81,7 @@ const Navigation = () => {
                   <button
                     className={`flex items-center gap-1 px-4 py-2 text-[15px] font-bold transition-all duration-300 rounded-lg ${
                       hoveredItem === item.name
-                        ? "text-[#D4AF37] bg-slate-50"
+                        ? "text-[#D4AF37]"
                         : "text-slate-800"
                     }`}
                   >
@@ -100,17 +101,14 @@ const Navigation = () => {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 8 }}
-                        className={`absolute top-[calc(100%-8px)] pt-4 z-50 ${
-                          item.name === "Services"
-                            ? "left-1/2 -translate-x-1/2"
-                            : "left-0"
-                        }`}
+                        // FIX: Center dropdown with left-1/2 and -translate-x-1/2
+                        className={`absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50`}
                       >
                         <div className="bg-[#1a1a1a] p-4 shadow-2xl rounded-xl border border-white/10">
                           <ul
                             className={`grid gap-1 ${
                               item.categories.length > 6
-                                ? "grid-cols-2 w-125"
+                                ? "grid-cols-2 w-[500px]"
                                 : "grid-cols-1 w-60"
                             }`}
                           >
@@ -136,13 +134,12 @@ const Navigation = () => {
             <Button
               variant="ghost"
               size="icon"
-              className="hover:text-[#D4AF37] hover:bg-slate-50 cursor-pointer rounded-full"
+              className="hover:text-[#D4AF37] hover:bg-slate-50 rounded-full"
             >
               <User className="h-5 w-5" />
             </Button>
 
-            {/* Styled Contact Button */}
-            <Button className="hidden md:flex bg-black text-white hover:bg-[#D4AF37] hover:text-black transition-all duration-300 rounded-full px-6 font-bold shadow-lg hover:shadow-[#D4AF37]/20 border-none group">
+            <Button className="hidden md:flex bg-black text-white hover:bg-[#D4AF37] hover:text-black transition-all duration-300 rounded-full px-6 font-bold border-none group">
               <PhoneCall className="h-4 w-4 mr-2 group-hover:animate-pulse" />
               Contact Us
             </Button>
