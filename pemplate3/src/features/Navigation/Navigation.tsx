@@ -56,7 +56,7 @@ const Navigation = () => {
     <motion.div
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
-      className="sticky top-0 z-50 w-full"
+      className="sticky top-0 z-100 w-full"
     >
       <div className="container mx-auto px-4 py-4">
         <div className="bg-white border border-slate-100 rounded-2xl flex items-center justify-between px-6 h-14 shadow-sm relative">
@@ -108,7 +108,7 @@ const Navigation = () => {
                           <ul
                             className={`grid gap-1 ${
                               item.categories.length > 6
-                                ? "grid-cols-2 w-[500px]"
+                                ? "grid-cols-2 w-125"
                                 : "grid-cols-1 w-60"
                             }`}
                           >
