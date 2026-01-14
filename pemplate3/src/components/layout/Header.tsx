@@ -1,32 +1,51 @@
-// import Contact from "@/features/Contact/ContactBar";
+"use client";
+import { motion } from "framer-motion";
 import Navigation from "@/features/Navigation/Navigation";
 import MainNavigation from "@/features/MainNavigation/MainNavigation";
 
 export default function Header() {
   return (
-    <header
-      className="relative w-full min-h-[70vh] flex flex-col text-white 
-                 /* 2026 Glassmorphism Background: Deep charcoal gradient */
-                 bg-[#0a0a0a] bg-[radial-gradient(circle_at_top_right,#1a1a1a,#000000)]"
+    <motion.header
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1, ease: "easeOut" }}
+      className="relative w-full min-h-[80vh] md:min-h-screen flex flex-col bg-white border-b border-[#D4AF37]/70 shadow-sm"
     >
-      {/* Optional: Animated Glass Glow Effect */}
+      {/* Background Glows */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-[#D4AF37]/5 blur-[120px] rounded-full" />
-        <div className="absolute top-[20%] -right-[5%] w-[30%] h-[30%] bg-blue-500/5 blur-[100px] rounded-full" />
+        <motion.div
+          animate={{ scale: [1, 1.1, 1], opacity: [0.1, 0.2, 0.1] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-[10%] -left-[10%] w-[50%] md:w-[40%] h-[40%] bg-[#D4AF37]/10 blur-[150px] rounded-full"
+        />
       </div>
 
-      <div className="relative z-10 w-full flex flex-col h-full backdrop-blur-[2px]">
-        {/* <Contact /> */}
-
-        {/* Navigation Wrapper with subtle glass border-bottom */}
-        <div className="w-full border-b border-white/5">
+      {/* 
+        FIX 1: Navigation MUST be separate and have the highest z-index.
+        We removed it from the blurred container below.
+      */}
+      <nav className="sticky top-0 z-100 w-full border-b border-[#D4AF37]/30 bg-white/80 backdrop-blur-md">
+        <div className="max-w-7xl mx-auto px-4 md:px-8">
           <Navigation />
         </div>
+      </nav>
 
-        <div className="flex-1 flex flex-col">
-          <MainNavigation />
-        </div>
+      {/* 
+        FIX 2: Content Area is separate and has a lower z-index (z-0).
+        This ensures it never competes with the nav dropdowns.
+      */}
+      <div className="relative z-0 w-full flex-1 flex flex-col backdrop-blur-[2px]">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.6 }}
+          className="flex-1 flex flex-col justify-center px-6 md:px-12 lg:px-24 py-12"
+        >
+          <div className="max-w-7xl mx-auto w-full">
+            <MainNavigation />
+          </div>
+        </motion.div>
       </div>
-    </header>
+    </motion.header>
   );
 }
