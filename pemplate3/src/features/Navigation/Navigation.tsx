@@ -3,7 +3,7 @@
 import { useState } from "react";
 import LOGO from "../../assets/Image/logo/logo.jpg";
 import { motion, AnimatePresence } from "framer-motion";
-import { User, PhoneCall, Menu, ChevronDown } from "lucide-react";
+import { User, PhoneCall, Menu, ChevronDown, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -56,10 +56,11 @@ const Navigation = () => {
     <motion.div
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
-      className="sticky top-0 z-100 w-full"
+      className="sticky top-0 z-50 w-full"
     >
       <div className="container mx-auto px-4 py-4">
         <div className="bg-white border border-slate-100 rounded-2xl flex items-center justify-between px-6 h-14 shadow-sm relative">
+          {/* Logo */}
           <motion.img
             whileHover={{ scale: 1.05 }}
             src={LOGO}
@@ -73,13 +74,12 @@ const Navigation = () => {
               {NAV_ITEMS.map((item) => (
                 <li
                   key={item.name}
-                  // FIX: Added 'relative' so the dropdown anchors to this specific item
                   className="relative h-full flex items-center"
                   onMouseEnter={() => setHoveredItem(item.name)}
                   onMouseLeave={() => setHoveredItem(null)}
                 >
                   <button
-                    className={`flex items-center gap-1 px-4 py-2 text-[15px] font-bold transition-all duration-300 rounded-lg ${
+                    className={`flex items-center gap-1 px-4 py-2 text-[15px] font-bold rounded-lg transition-all duration-300 ${
                       hoveredItem === item.name
                         ? "text-[#D4AF37]"
                         : "text-slate-800"
@@ -101,10 +101,9 @@ const Navigation = () => {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 8 }}
-                        // FIX: Center dropdown with left-1/2 and -translate-x-1/2
-                        className={`absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50`}
+                        className="absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50"
                       >
-                        <div className="bg-[#1a1a1a] p-4 shadow-2xl rounded-xl border border-white/10">
+                        <div className="bg-[#1a1a1a] p-4 rounded-xl shadow-2xl border border-white/10">
                           <ul
                             className={`grid gap-1 ${
                               item.categories.length > 6
@@ -114,7 +113,7 @@ const Navigation = () => {
                           >
                             {item.categories.map((cat) => (
                               <li key={cat}>
-                                <a className="block rounded-lg px-4 py-2.5 text-sm font-medium text-white/80 hover:text-black hover:bg-[#D4AF37] transition-all duration-200 cursor-pointer">
+                                <a className="block px-4 py-2.5 rounded-lg text-sm font-medium text-white/80 hover:text-black hover:bg-[#D4AF37] transition-all cursor-pointer">
                                   {cat}
                                 </a>
                               </li>
@@ -139,13 +138,13 @@ const Navigation = () => {
               <User className="h-5 w-5" />
             </Button>
 
-            <Button className="hidden md:flex bg-black text-white hover:bg-[#D4AF37] hover:text-black transition-all duration-300 rounded-full px-6 font-bold border-none group">
-              <PhoneCall className="h-4 w-4 mr-2 group-hover:animate-pulse" />
+            <Button className="hidden md:flex bg-black text-white hover:bg-[#D4AF37] hover:text-black rounded-full px-6 font-bold transition-all">
+              <PhoneCall className="h-4 w-4 mr-2" />
               Contact Us
             </Button>
 
             {/* Mobile Menu */}
-            <Sheet>
+            <Sheet modal>
               <SheetTrigger asChild>
                 <Button
                   variant="ghost"
@@ -155,55 +154,66 @@ const Navigation = () => {
                   <Menu className="h-6 w-6" />
                 </Button>
               </SheetTrigger>
+
               <SheetContent
                 side="right"
-                className="w-[320px] bg-white border-l border-slate-100 p-0"
+                className="fixed inset-0 w-screen h-screen bg-white z-9999 p-0 flex flex-col [&>button]:hidden"
               >
-                <div className="h-full flex flex-col pt-12 pb-6">
-                  <div className="flex-1 overflow-y-auto px-6">
-                    <Accordion type="single" collapsible className="w-full">
-                      {NAV_ITEMS.map((item) =>
-                        item.categories ? (
-                          <AccordionItem
-                            value={item.name}
-                            key={item.name}
-                            className="border-b-slate-100"
-                          >
-                            <AccordionTrigger className="text-[17px] font-bold text-slate-800 hover:text-[#D4AF37] py-4 hover:no-underline">
+                {/* Header (only custom close button) */}
+                <div className="flex justify-end px-6 py-4 border-b">
+                  <SheetClose asChild>
+                    <button className="rounded-full p-2 hover:bg-slate-100">
+                      <X className="h-6 w-6" />
+                    </button>
+                  </SheetClose>
+                </div>
+
+                {/* Body */}
+                <div className="flex-1 overflow-y-auto px-6">
+                  <Accordion type="single" collapsible className="w-full">
+                    {NAV_ITEMS.map((item) =>
+                      item.categories ? (
+                        <AccordionItem
+                          key={item.name}
+                          value={item.name}
+                          className="border-b-slate-100"
+                        >
+                          <AccordionTrigger className="text-[17px] font-bold py-4 hover:no-underline hover:text-[#D4AF37]">
+                            {item.name}
+                          </AccordionTrigger>
+                          <AccordionContent>
+                            <div className="flex flex-col gap-1 pl-4 border-l-2 border-[#D4AF37]/30 mb-2">
+                              {item.categories.map((cat) => (
+                                <SheetClose asChild key={cat}>
+                                  <a className="py-3 text-[15px] font-semibold text-slate-600 hover:text-[#D4AF37] cursor-pointer">
+                                    {cat}
+                                  </a>
+                                </SheetClose>
+                              ))}
+                            </div>
+                          </AccordionContent>
+                        </AccordionItem>
+                      ) : (
+                        <div
+                          key={item.name}
+                          className="py-4 border-b border-slate-100"
+                        >
+                          <SheetClose asChild>
+                            <a className="text-[17px] font-bold text-slate-800 hover:text-[#D4AF37] block cursor-pointer">
                               {item.name}
-                            </AccordionTrigger>
-                            <AccordionContent>
-                              <div className="flex flex-col gap-1 pl-4 border-l-2 border-[#D4AF37]/30 mb-2">
-                                {item.categories.map((cat) => (
-                                  <SheetClose asChild key={cat}>
-                                    <a className="block py-3 text-[15px] font-semibold text-slate-600 hover:text-[#D4AF37] transition-colors">
-                                      {cat}
-                                    </a>
-                                  </SheetClose>
-                                ))}
-                              </div>
-                            </AccordionContent>
-                          </AccordionItem>
-                        ) : (
-                          <div
-                            key={item.name}
-                            className="py-4 border-b border-slate-100"
-                          >
-                            <SheetClose asChild>
-                              <a className="text-[17px] font-bold text-slate-800 hover:text-[#D4AF37] block w-full transition-colors">
-                                {item.name}
-                              </a>
-                            </SheetClose>
-                          </div>
-                        )
-                      )}
-                    </Accordion>
-                  </div>
-                  <div className="px-6 pt-6 mt-auto">
-                    <Button className="w-full bg-black text-white hover:bg-[#D4AF37] hover:text-black rounded-xl h-12 font-bold transition-all duration-300">
-                      Connect with Us
-                    </Button>
-                  </div>
+                            </a>
+                          </SheetClose>
+                        </div>
+                      )
+                    )}
+                  </Accordion>
+                </div>
+
+                {/* Footer */}
+                <div className="px-6 pb-6">
+                  <Button className="w-full bg-black text-white hover:bg-[#D4AF37] hover:text-black rounded-xl h-12 font-bold transition-all">
+                    Connect with Us
+                  </Button>
                 </div>
               </SheetContent>
             </Sheet>

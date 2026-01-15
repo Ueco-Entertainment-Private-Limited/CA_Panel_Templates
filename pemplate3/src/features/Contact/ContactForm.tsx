@@ -8,11 +8,11 @@ import { Send } from "lucide-react";
 const ContactForm = () => {
   return (
     <motion.div
-    initial={{ opacity: 0, x: 60 }}
-    whileInView={{ opacity: 1, x: 0 }}
-    viewport={{ once: true }}
-    className="relative z-0 bg-white/40 backdrop-blur-2xl p-8 md:p-12 rounded-[2.5rem] border border-[#D4AF37]/30 shadow-xs w-full max-w-2xl flex flex-col space-y-6"
-  >
+      initial={{ opacity: 0, x: 60 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      className="relative z-0 bg-white/40 backdrop-blur-2xl p-8 md:p-12 rounded-[2.5rem] border border-[#D4AF37]/70 shadow-xs w-full max-w-2xl flex flex-col space-y-6"
+    >
       <div className="space-y-2">
         <h3 className="text-2xl lg:text-4xl font-black text-black uppercase tracking-tighter leading-none">
           Get In <span className="text-[#D4AF37]">Touch</span>
@@ -25,20 +25,20 @@ const ContactForm = () => {
       <form className="flex flex-col gap-4">
         <Input
           placeholder="Full Name"
-          className="bg-white/60 border-[#D4AF37]/20 focus:border-[#D4AF37] text-black placeholder:text-black/40 h-12 rounded-2xl transition-all"
+          className="bg-white/60 border-[#D4AF37]/70 focus:border-[#D4AF37] text-black placeholder:text-black/60 h-12 rounded-2xl transition-all"
         />
         <Input
           placeholder="Email Address"
-          className="bg-white/60 border-[#D4AF37]/20 focus:border-[#D4AF37] text-black placeholder:text-black/40 h-12 rounded-2xl transition-all"
+          className="bg-white/60 border-[#D4AF37]/70 focus:border-[#D4AF37] text-black placeholder:text-black/60 h-12 rounded-2xl transition-all"
         />
         <div className="grid grid-cols-2 gap-4">
           <Input
             placeholder="Mobile"
-            className="bg-white/60 border-[#D4AF37]/20 focus:border-[#D4AF37] text-black placeholder:text-black/40 h-12 rounded-2xl transition-all"
+            className="bg-white/60 border-[#D4AF37]/70 focus:border-[#D4AF37] text-black placeholder:text-black/60 h-12 rounded-2xl transition-all"
           />
           <Input
             placeholder="Company"
-            className="bg-white/60 border-[#D4AF37]/20 focus:border-[#D4AF37] text-black placeholder:text-black/40 h-12 rounded-2xl transition-all"
+            className="bg-white/60 border-[#D4AF37]/70 focus:border-[#D4AF37] text-black placeholder:text-black/60 h-12 rounded-2xl transition-all"
           />
         </div>
 

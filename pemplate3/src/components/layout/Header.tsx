@@ -39,7 +39,7 @@ export default function Header() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.6 }}
-          className="flex-1 flex flex-col justify-center px-6 md:px-12 lg:px-24 py-12"
+          className="flex-1 flex flex-col justify-center px-6 md:px-12 lg:px-24 py-4"
         >
           <div className="max-w-7xl mx-auto w-full">
             <MainNavigation />
